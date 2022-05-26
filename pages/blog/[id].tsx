@@ -16,6 +16,7 @@ const BlogID = (blog: TArticle) => {
           __html: `${article.content}`,
         }}
       />
+      <Link href="/">HOME</Link>
     </main>
   );
 };

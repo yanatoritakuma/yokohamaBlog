@@ -11,12 +11,11 @@ const BlogTop = (blog: TContents) => {
       <ul>
         {blog.blog.map((blog: any) => (
           <li key={blog.id}>
-            <Link href={`/blog/${blog.id}`}>
-              <a>{blog.title}</a>
-            </Link>
+            <Link href={`/blog/${blog.id}`}>{blog.title}</Link>
           </li>
         ))}
       </ul>
+      <Link href="/">HOME</Link>
     </div>
   );
 };

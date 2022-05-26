@@ -1,8 +1,10 @@
-import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import { css } from "@emotion/react";
+import { client } from "../libs/client";
+import { TContents, TBlog } from "../types/TypeBlog";
 
-const Home: NextPage = () => {
+const Home = (blog: TContents) => {
   return (
     <>
       <Head>
@@ -11,12 +13,59 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <main css={main}>
         <h1>横浜ブログ</h1>
-        <Link href="/BlogTop">BlogTop</Link>
+        <div css={articleBox}>
+          {blog.blog.map((blog: TBlog) => (
+            <div key={blog.id}>
+              <Link href={`/blog/${blog.id}`}>
+                <a>{blog.title}</a>
+              </Link>
+            </div>
+          ))}
+        </div>
+        <div css={BlogBox}>
+          <Link href="/BlogTop">BlogTop</Link>
+        </div>
       </main>
     </>
   );
 };
 
+export const getStaticProps = async () => {
+  const data = await client.get({ endpoint: "blogs" });
+
+  return {
+    props: {
+      blog: data.contents,
+    },
+  };
+};
+
 export default Home;
+
+const main = css`
+  margin: 0 auto;
+  max-width: 1440px;
+
+  h1 {
+    text-align: center;
+  }
+`;
+
+const articleBox = css`
+  margin: 0 auto;
+  width: 30%;
+  text-align: center;
+`;
+
+const BlogBox = css`
+  margin: 20px 0;
+  text-align: center;
+
+  a {
+    font-size: 24px;
+    text-decoration: none;
+    color: #333;
+  }
+`;
