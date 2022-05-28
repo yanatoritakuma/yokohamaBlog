@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import { css } from "@emotion/react";
+import { css } from "@emotion/react";
 import { client } from "../../libs/client";
 import Link from "next/link";
 import { TArticle } from "../../types/TypeBlog";
@@ -8,7 +8,7 @@ const BlogID = (blog: TArticle) => {
   const article = blog.blog;
 
   return (
-    <main>
+    <main css={mainBox}>
       <h1>{article.title}</h1>
       <p>{article.publishedAt}</p>
       <div
@@ -41,3 +41,9 @@ export const getStaticProps = async (context: any) => {
 };
 
 export default BlogID;
+
+const mainBox = css`
+  img {
+    width: 80%;
+  }
+`;

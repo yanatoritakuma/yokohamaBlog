@@ -3,6 +3,7 @@ import Link from "next/link";
 import { css } from "@emotion/react";
 import { client } from "../libs/client";
 import { TContents, TBlog } from "../types/TypeBlog";
+import { TopSlide } from "./components/Topslide";
 
 const Home = (blog: TContents) => {
   return (
@@ -15,6 +16,7 @@ const Home = (blog: TContents) => {
 
       <main css={main}>
         <h1>横浜ブログ</h1>
+        <TopSlide />
         <div css={articleBox}>
           {blog.blog.map((blog: TBlog) => (
             <div key={blog.id}>
