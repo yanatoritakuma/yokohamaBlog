@@ -1,11 +1,9 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Image from "next/image";
 import { css } from "@emotion/react";
 import "swiper/css";
 import "swiper/css/navigation";
-
-// import required modules
 import { Navigation } from "swiper";
 
 export const TopSlide = () => {
@@ -70,7 +68,7 @@ const mainBox = css`
   }
 
   .swiperImg {
-    background-color: red;
+    background-color: skyblue;
     width: 100%;
     height: 600px;
     display: flex;

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { css } from "@emotion/react";
 import { client } from "../../libs/client";
 import Link from "next/link";
+import Image from "next/image";
 import { TArticle } from "../../types/TypeBlog";
 
 const BlogID = (blog: TArticle) => {
@@ -9,6 +10,14 @@ const BlogID = (blog: TArticle) => {
 
   return (
     <main css={mainBox}>
+      {article.eyecatch !== undefined && (
+        <Image
+          src={article.eyecatch.url}
+          alt="アイキャッチ画像"
+          width={900}
+          height={500}
+        />
+      )}
       <h1>{article.title}</h1>
       <p>{article.publishedAt}</p>
       <div
