@@ -3,7 +3,7 @@ import Link from "next/link";
 import { css } from "@emotion/react";
 import { client } from "../libs/client";
 import { TContents, TBlog } from "../types/TypeBlog";
-import { TopSlide } from "./components/Topslide";
+import { TopSlide } from "./components/TopSlide";
 
 const Home = (blog: TContents) => {
   return (
