@@ -1,34 +1,35 @@
 import React from "react";
+import { css } from "@emotion/react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Image from "next/image";
-import { css } from "@emotion/react";
+import Link from "next/link";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper";
+import { TContents } from "../types/TypeBlog";
 
-export const TopSlide = () => {
+type Props = {
+  blog: TContents;
+};
+
+export const TopSlide = (props: Props) => {
+  const { blog } = props;
+  const trend = blog.blog.filter((v) => v.category?.name === "トレンド");
   return (
     <section css={mainBox}>
-      <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
-        <SwiperSlide>
-          <span className="swiperImg">testImage1</span>
-          {/* <Image
-            className="swiperImg"
-            src="https://images.microcms-assets.io/assets/74c74656d94948558faa781854aab672/2ceadf63158a4854a579ba1338d2693d/minatomirai.jpeg"
-            alt=""
-            width={300}
-            height={600}
-          /> */}
-        </SwiperSlide>
-        <SwiperSlide>
-          <span className="swiperImg">testImage2</span>
-        </SwiperSlide>
-        <SwiperSlide>
-          <span className="swiperImg">testImage3</span>
-        </SwiperSlide>
-        <SwiperSlide>
-          <span className="swiperImg">testImage4</span>
-        </SwiperSlide>
+      <Swiper navigation={true} modules={[Navigation]}>
+        {trend.map((v) => (
+          <SwiperSlide key={v.id}>
+            <Link href={`/blog/${v.id}`}>
+              <Image
+                src={v.eyecatch.url}
+                alt="アイキャッチ"
+                width={1440}
+                layout="fill"
+              />
+            </Link>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </section>
   );
@@ -38,6 +39,21 @@ const mainBox = css`
   .swiper {
     width: 100%;
     height: 600px;
+
+    img {
+      cursor: pointer;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .swiper {
+      height: 400px;
+    }
+  }
+  @media screen and (max-width: 425px) {
+    .swiper {
+      height: 300px;
+    }
   }
 
   .swiper-slide {
@@ -65,14 +81,5 @@ const mainBox = css`
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
-
-  .swiperImg {
-    background-color: skyblue;
-    width: 100%;
-    height: 600px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 `;

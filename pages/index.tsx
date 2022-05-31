@@ -16,7 +16,7 @@ const Home = (blog: TContents) => {
 
       <main css={main}>
         <h1>横浜ブログ</h1>
-        <TopSlide />
+        <TopSlide blog={blog} />
         <div css={articleBox}>
           {blog.blog.map((blog: TBlog) => (
             <div key={blog.id}>
