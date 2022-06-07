@@ -42,6 +42,9 @@ const mainBox = css`
 
     img {
       cursor: pointer;
+      &:hover {
+        opacity: 0.8;
+      }
     }
   }
 
