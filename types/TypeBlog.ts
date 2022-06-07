@@ -30,6 +30,11 @@ export type TArticle = {
     category: null | string;
     content: string;
     createdAt: string;
+    eyecatch?: {
+      height: number;
+      url: string;
+      width: number;
+    };
     id: string;
     publishedAt: string;
     revisedAt: string;
