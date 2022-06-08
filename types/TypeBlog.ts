@@ -9,7 +9,7 @@ export type TBlog = {
   };
   content: string;
   createdAt: string;
-  eyecatch: {
+  eyecatch?: {
     height: number;
     url: string;
     width: number;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { css } from "@emotion/react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Image from "next/image";
@@ -7,12 +7,14 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper";
 import { TContents } from "../types/TypeBlog";
+import noImage from "../public/image/noimage.png";
 
 type Props = {
   blog: TContents;
 };
 
-export const TopSlide = (props: Props) => {
+// eslint-disable-next-line react/display-name
+export const TopSlide = memo((props: Props) => {
   const { blog } = props;
   const trend = blog.blog.filter((v) => v.category?.name === "トレンド");
   return (
@@ -21,19 +23,28 @@ export const TopSlide = (props: Props) => {
         {trend.map((v) => (
           <SwiperSlide key={v.id}>
             <Link href={`/blog/${v.id}`}>
-              <Image
-                src={v.eyecatch.url}
-                alt="アイキャッチ"
-                width={1440}
-                layout="fill"
-              />
+              {v.eyecatch !== undefined ? (
+                <Image
+                  src={v.eyecatch?.url}
+                  alt="アイキャッチ"
+                  width={1440}
+                  layout="fill"
+                />
+              ) : (
+                <Image
+                  src={noImage}
+                  alt="画像なし"
+                  width={1440}
+                  layout="fill"
+                />
+              )}
             </Link>
           </SwiperSlide>
         ))}
       </Swiper>
     </section>
   );
-};
+});
 
 const mainBox = css`
   .swiper {

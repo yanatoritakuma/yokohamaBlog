@@ -4,6 +4,7 @@ import { css } from "@emotion/react";
 import { client } from "../libs/client";
 import { TContents, TBlog } from "../types/TypeBlog";
 import { TopSlide } from "../components/TopSlide";
+import { NewArticle } from "../components/NewArticle";
 
 const Home = (blog: TContents) => {
   return (
@@ -29,6 +30,7 @@ const Home = (blog: TContents) => {
         <div css={BlogBox}>
           <Link href="/BlogTop">BlogTop</Link>
         </div>
+        <NewArticle blog={blog} />
       </main>
     </>
   );
