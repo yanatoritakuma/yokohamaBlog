@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Navigation } from "swiper";
+import { Navigation, Pagination } from "swiper";
 import { TContents } from "../types/TypeBlog";
 import noImage from "../public/image/noimage.png";
 
@@ -16,20 +16,28 @@ type Props = {
 // eslint-disable-next-line react/display-name
 export const TopSlide = memo((props: Props) => {
   const { blog } = props;
+  console.log("blog", blog);
   const trend = blog.blog.filter((v) => v.category?.name === "トレンド");
   return (
     <section css={mainBox}>
-      <Swiper navigation={true} modules={[Navigation]}>
+      <Swiper
+        navigation={true}
+        pagination={true}
+        modules={[Navigation, Pagination]}
+      >
         {trend.map((v) => (
           <SwiperSlide key={v.id}>
             <Link href={`/blog/${v.id}`}>
               {v.eyecatch !== undefined ? (
-                <Image
-                  src={v.eyecatch?.url}
-                  alt="アイキャッチ"
-                  width={1440}
-                  layout="fill"
-                />
+                <div css={slideImg}>
+                  <h2>{v.title}</h2>
+                  <Image
+                    src={v.eyecatch?.url}
+                    alt="アイキャッチ"
+                    width={1440}
+                    layout="fill"
+                  />
+                </div>
               ) : (
                 <Image
                   src={noImage}
@@ -50,6 +58,10 @@ const mainBox = css`
   .swiper {
     width: 100%;
     height: 600px;
+
+    h2 {
+      cursor: pointer;
+    }
 
     img {
       cursor: pointer;
@@ -73,7 +85,6 @@ const mainBox = css`
   .swiper-slide {
     text-align: center;
     font-size: 18px;
-    background: #fff;
 
     /* Center slide text vertically */
     display: -webkit-box;
@@ -95,5 +106,22 @@ const mainBox = css`
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+`;
+
+const slideImg = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  h2 {
+    position: absolute;
+    z-index: 10;
+    background-color: #fff;
+    width: 300px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;

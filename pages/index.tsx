@@ -5,6 +5,8 @@ import { client } from "../libs/client";
 import { TContents, TBlog } from "../types/TypeBlog";
 import { TopSlide } from "../components/TopSlide";
 import { NewArticle } from "../components/NewArticle";
+import titleImg from "../public/image/title.jpeg";
+import Image from "next/image";
 
 const Home = (blog: TContents) => {
   return (
@@ -16,17 +18,10 @@ const Home = (blog: TContents) => {
       </Head>
 
       <main css={main}>
-        <h1>横浜ブログ</h1>
+        <h1>
+          <Image src={titleImg} alt="タイトル" width={300} height={150} />
+        </h1>
         <TopSlide blog={blog} />
-        <div css={articleBox}>
-          {blog.blog.map((blog: TBlog) => (
-            <div key={blog.id}>
-              <Link href={`/blog/${blog.id}`}>
-                <a>{blog.title}</a>
-              </Link>
-            </div>
-          ))}
-        </div>
         <div css={BlogBox}>
           <Link href="/BlogTop">BlogTop</Link>
         </div>
