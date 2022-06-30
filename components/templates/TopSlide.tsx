@@ -5,9 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Navigation, Pagination } from "swiper";
-import { TContents } from "../types/TypeBlog";
-import noImage from "../public/image/noimage.png";
+import { Navigation } from "swiper";
+import { TContents } from "../../types/TypeBlog";
+import noImage from "../../public/image/noimage.png";
 
 type Props = {
   blog: TContents;
@@ -16,15 +16,10 @@ type Props = {
 // eslint-disable-next-line react/display-name
 export const TopSlide = memo((props: Props) => {
   const { blog } = props;
-  console.log("blog", blog);
   const trend = blog.blog.filter((v) => v.category?.name === "トレンド");
   return (
     <section css={mainBox}>
-      <Swiper
-        navigation={true}
-        pagination={true}
-        modules={[Navigation, Pagination]}
-      >
+      <Swiper navigation={true} modules={[Navigation]}>
         {trend.map((v) => (
           <SwiperSlide key={v.id}>
             <Link href={`/blog/${v.id}`}>
@@ -58,10 +53,6 @@ const mainBox = css`
   .swiper {
     width: 100%;
     height: 600px;
-
-    h2 {
-      cursor: pointer;
-    }
 
     img {
       cursor: pointer;
@@ -123,5 +114,18 @@ const slideImg = css`
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+
+    @media screen and (max-width: 768px) {
+      font-size: 20px;
+      width: 230px;
+      height: 120px;
+    }
+
+    @media screen and (max-width: 420px) {
+      font-size: 18px;
+      width: 200px;
+      height: 110px;
+    }
   }
 `;
