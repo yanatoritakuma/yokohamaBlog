@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { TContents } from "../../types/TypeBlog";
 import noImage from "../../public/image/noimage.png";
-import { Button } from "../atoms/Button";
+import { LinkButton } from "../atoms/LinkButton";
 
 type Props = {
   blog: TContents;
@@ -38,7 +38,9 @@ export const NewArticle = memo((props: Props) => {
         ))}
       </div>
       <div css={btnBox}>
-        <Button>More</Button>
+        <Link href="BlogTop">
+          <LinkButton hoverLabel="click me!">More</LinkButton>
+        </Link>
       </div>
     </section>
   );

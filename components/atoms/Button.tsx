@@ -3,13 +3,18 @@ import { css } from "@emotion/react";
 
 type Props = {
   children: string | number;
+  onClick?: () => void;
 };
 
 // eslint-disable-next-line react/display-name
 export const Button = memo((props: Props) => {
-  const { children } = props;
+  const { children, onClick } = props;
 
-  return <button css={buttonClass}>{children}</button>;
+  return (
+    <button css={buttonClass} onClick={onClick}>
+      {children}
+    </button>
+  );
 });
 
 const buttonClass = css`

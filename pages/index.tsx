@@ -2,7 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { css } from "@emotion/react";
 import { client } from "../libs/client";
-import { TContents, TBlog } from "../types/TypeBlog";
+import { TContents } from "../types/TypeBlog";
 import { TopSlide } from "../components/templates/TopSlide";
 import { NewArticle } from "../components/templates/NewArticle";
 import titleImg from "../public/image/title.jpeg";
