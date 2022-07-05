@@ -2,34 +2,26 @@ import Head from "next/head";
 import Link from "next/link";
 import { css } from "@emotion/react";
 import { client } from "../libs/client";
-import { TContents, TBlog } from "../types/TypeBlog";
-import { TopSlide } from "../components/TopSlide";
-import { NewArticle } from "../components/NewArticle";
+import { TContents } from "../types/TypeBlog";
+import { TopSlide } from "../components/templates/TopSlide";
+import { NewArticle } from "../components/templates/NewArticle";
+import titleImg from "../public/image/title.jpeg";
+import Image from "next/image";
 
 const Home = (blog: TContents) => {
   return (
     <>
       <Head>
-        <title>yokohamaBlog</title>
+        <title>はまっぷ</title>
         <meta name="description" content="yokohamaBlog" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main css={main}>
-        <h1>横浜ブログ</h1>
+        <h1>
+          <Image src={titleImg} alt="タイトル" width={300} height={150} />
+        </h1>
         <TopSlide blog={blog} />
-        <div css={articleBox}>
-          {blog.blog.map((blog: TBlog) => (
-            <div key={blog.id}>
-              <Link href={`/blog/${blog.id}`}>
-                <a>{blog.title}</a>
-              </Link>
-            </div>
-          ))}
-        </div>
-        <div css={BlogBox}>
-          <Link href="/BlogTop">BlogTop</Link>
-        </div>
         <NewArticle blog={blog} />
       </main>
     </>
@@ -54,22 +46,14 @@ const main = css`
 
   h1 {
     text-align: center;
-  }
-`;
 
-const articleBox = css`
-  margin: 0 auto;
-  width: 30%;
-  text-align: center;
-`;
+    @media screen and (max-width: 768px) {
+      margin: 0 auto;
+      width: 200px;
+    }
 
-const BlogBox = css`
-  margin: 20px 0;
-  text-align: center;
-
-  a {
-    font-size: 24px;
-    text-decoration: none;
-    color: #333;
+    @media screen and (max-width: 420px) {
+      width: 150px;
+    }
   }
 `;

@@ -6,8 +6,8 @@ import Link from "next/link";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper";
-import { TContents } from "../types/TypeBlog";
-import noImage from "../public/image/noimage.png";
+import { TContents } from "../../types/TypeBlog";
+import noImage from "../../public/image/noimage.png";
 
 type Props = {
   blog: TContents;
@@ -24,12 +24,15 @@ export const TopSlide = memo((props: Props) => {
           <SwiperSlide key={v.id}>
             <Link href={`/blog/${v.id}`}>
               {v.eyecatch !== undefined ? (
-                <Image
-                  src={v.eyecatch?.url}
-                  alt="アイキャッチ"
-                  width={1440}
-                  layout="fill"
-                />
+                <div css={slideImg}>
+                  <h2>{v.title}</h2>
+                  <Image
+                    src={v.eyecatch?.url}
+                    alt="アイキャッチ"
+                    width={1440}
+                    layout="fill"
+                  />
+                </div>
               ) : (
                 <Image
                   src={noImage}
@@ -53,9 +56,7 @@ const mainBox = css`
 
     img {
       cursor: pointer;
-      &:hover {
-        opacity: 0.8;
-      }
+      transition: 0.5s all;
     }
   }
 
@@ -73,7 +74,6 @@ const mainBox = css`
   .swiper-slide {
     text-align: center;
     font-size: 18px;
-    background: #fff;
 
     /* Center slide text vertically */
     display: -webkit-box;
@@ -95,5 +95,42 @@ const mainBox = css`
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+`;
+
+const slideImg = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s all;
+  &:hover {
+    img {
+      transform: scale(1.1, 1.1);
+      transition: 0.5s all;
+    }
+  }
+
+  h2 {
+    position: absolute;
+    z-index: 10;
+    background-color: #fff;
+    width: 300px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    @media screen and (max-width: 768px) {
+      font-size: 20px;
+      width: 230px;
+      height: 120px;
+    }
+
+    @media screen and (max-width: 420px) {
+      font-size: 18px;
+      width: 200px;
+      height: 110px;
+    }
   }
 `;

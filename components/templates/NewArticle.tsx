@@ -2,8 +2,9 @@ import React, { memo } from "react";
 import { css } from "@emotion/react";
 import Link from "next/link";
 import Image from "next/image";
-import { TContents } from "../types/TypeBlog";
-import noImage from "../public/image/noimage.png";
+import { TContents } from "../../types/TypeBlog";
+import noImage from "../../public/image/noimage.png";
+import { LinkButton } from "../atoms/LinkButton";
 
 type Props = {
   blog: TContents;
@@ -16,32 +17,30 @@ export const NewArticle = memo((props: Props) => {
 
   return (
     <section css={newArticleMainBox}>
-      <h2>新着記事</h2>
+      <h2>newTopics</h2>
       <div css={newArticleMainBoxIn}>
         {newArticle.map((v) => (
           <div key={v.id} css={newArticleBox}>
-            <p>{v.title}</p>
             <Link href={`/blog/${v.id}`}>
               {v.eyecatch !== undefined ? (
                 <Image
                   src={v.eyecatch.url}
                   alt="アイキャッチ"
-                  width={300}
-                  height={200}
-                  // layout="fill"
+                  width={500}
+                  height={300}
                 />
               ) : (
-                <Image
-                  src={noImage}
-                  alt="画像なし"
-                  width={300}
-                  height={200}
-                  // layout="fill"
-                />
+                <Image src={noImage} alt="画像なし" width={500} height={300} />
               )}
             </Link>
+            <p>{v.title}</p>
           </div>
         ))}
+      </div>
+      <div css={btnBox}>
+        <Link href="BlogTop">
+          <LinkButton hoverLabel="click me!">More</LinkButton>
+        </Link>
       </div>
     </section>
   );
@@ -58,22 +57,41 @@ const newArticleMainBoxIn = css`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
   h2 {
     text-align: center;
   }
 `;
 
 const newArticleBox = css`
+  margin: 10px auto;
   padding: 12px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  border: 1px solid #aaa;
   cursor: pointer;
+  width: 96%;
+  overflow: hidden;
+
+  img {
+    transition: 0.5s all;
+    &:hover {
+      transform: scale(1.1, 1.1);
+      transition: 0.5s all;
+    }
+  }
 
   p {
     width: 100%;
     text-align: center;
   }
+`;
+
+const btnBox = css`
+  margin: 30px 0;
+  text-align: center;
 `;
