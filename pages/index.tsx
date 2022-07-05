@@ -7,6 +7,7 @@ import { TopSlide } from "../components/templates/TopSlide";
 import { NewArticle } from "../components/templates/NewArticle";
 import titleImg from "../public/image/title.jpeg";
 import Image from "next/image";
+import { SpecialFeature } from "../components/templates/SpecialFeature";
 
 const Home = (blog: TContents) => {
   return (
@@ -23,6 +24,7 @@ const Home = (blog: TContents) => {
         </h1>
         <TopSlide blog={blog} />
         <NewArticle blog={blog} />
+        <SpecialFeature />
       </main>
     </>
   );
