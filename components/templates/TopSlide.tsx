@@ -56,9 +56,7 @@ const mainBox = css`
 
     img {
       cursor: pointer;
-      &:hover {
-        opacity: 0.8;
-      }
+      transition: 0.5s all;
     }
   }
 
@@ -104,6 +102,13 @@ const slideImg = css`
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: 0.5s all;
+  &:hover {
+    img {
+      transform: scale(1.1, 1.1);
+      transition: 0.5s all;
+    }
+  }
 
   h2 {
     position: absolute;

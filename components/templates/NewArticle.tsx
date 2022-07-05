@@ -75,6 +75,15 @@ const newArticleBox = css`
   align-items: center;
   cursor: pointer;
   width: 96%;
+  overflow: hidden;
+
+  img {
+    transition: 0.5s all;
+    &:hover {
+      transform: scale(1.1, 1.1);
+      transition: 0.5s all;
+    }
+  }
 
   p {
     width: 100%;
@@ -84,4 +93,5 @@ const newArticleBox = css`
 
 const btnBox = css`
   margin: 30px 0;
+  text-align: center;
 `;

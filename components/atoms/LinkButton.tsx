@@ -52,7 +52,7 @@ const buttonClass = css`
   button:before {
     content: attr(data-hover);
     position: absolute;
-    top: 1.1em;
+    top: 1.3em;
     left: 0;
     width: 100%;
     text-transform: uppercase;
