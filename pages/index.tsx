@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Link from "next/link";
 import { css } from "@emotion/react";
 import { client } from "../libs/client";
 import { TContents } from "../types/TypeBlog";
