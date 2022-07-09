@@ -7,14 +7,12 @@ import playImg from "../../public/image/play.jpeg";
 
 // eslint-disable-next-line react/display-name
 export const SpecialFeature = memo(() => {
-  console.log("SpecialFeature");
-
   return (
     <section css={featureBox}>
       <h2>SpecialFeature</h2>
       <div css={imgLinkBox}>
         <div className="imgBox">
-          <Link href="/">
+          <Link href="/categories/eat">
             <div className="imgBoxIn">
               <Image src={eatImg} alt="eat" width={900} height={500} />
               <span className="imgString">Eat</span>
@@ -22,7 +20,7 @@ export const SpecialFeature = memo(() => {
           </Link>
         </div>
         <div className="imgBox">
-          <Link href="/">
+          <Link href="/categories/play">
             <div className="imgBoxIn">
               <Image src={playImg} alt="eat" width={900} height={500} />
               <span className="imgString">Play</span>
@@ -55,6 +53,13 @@ const imgLinkBox = css`
 
   .imgBoxIn {
     position: relative;
+
+    &:hover {
+      .imgString {
+        transform: rotateZ(360deg);
+        transition: 0.5s;
+      }
+    }
 
     .imgString {
       position: absolute;
