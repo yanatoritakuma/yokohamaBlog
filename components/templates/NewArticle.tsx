@@ -2,36 +2,40 @@ import React, { memo } from "react";
 import { css } from "@emotion/react";
 import Link from "next/link";
 import Image from "next/image";
-import { TContents } from "../../types/TypeBlog";
 import noImage from "../../public/image/noimage.png";
 import { LinkButton } from "../atoms/LinkButton";
-
-type Props = {
-  blog: TContents;
-};
+import { useSelector } from "react-redux";
+import { RootState } from "../../app/store";
 
 // eslint-disable-next-line react/display-name
-export const NewArticle = memo((props: Props) => {
-  const { blog } = props;
-  const newArticle = blog.blog.slice(0, 6);
+export const NewArticle = memo(() => {
+  const blogStore = useSelector((state: RootState) => state.blog);
+  const newArticle = blogStore.blog?.blog.slice(0, 6);
 
   return (
     <section css={newArticleMainBox}>
       <h2>newTopics</h2>
       <div css={newArticleMainBoxIn}>
-        {newArticle.map((v) => (
+        {newArticle?.map((v) => (
           <div key={v.id} css={newArticleBox}>
             <Link href={`/blog/${v.id}`}>
-              {v.eyecatch !== undefined ? (
-                <Image
-                  src={v.eyecatch.url}
-                  alt="アイキャッチ"
-                  width={500}
-                  height={300}
-                />
-              ) : (
-                <Image src={noImage} alt="画像なし" width={500} height={300} />
-              )}
+              <div>
+                {v.eyecatch !== undefined ? (
+                  <Image
+                    src={v.eyecatch.url}
+                    alt="アイキャッチ"
+                    width={500}
+                    height={300}
+                  />
+                ) : (
+                  <Image
+                    src={noImage}
+                    alt="画像なし"
+                    width={500}
+                    height={300}
+                  />
+                )}
+              </div>
             </Link>
             <p>{v.title}</p>
           </div>
@@ -39,7 +43,9 @@ export const NewArticle = memo((props: Props) => {
       </div>
       <div css={btnBox}>
         <Link href="BlogTop">
-          <LinkButton hoverLabel="click me!">More</LinkButton>
+          <div>
+            <LinkButton hoverLabel="click me!">More</LinkButton>
+          </div>
         </Link>
       </div>
     </section>

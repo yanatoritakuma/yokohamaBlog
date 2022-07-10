@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { useEffect } from "react";
 import { css } from "@emotion/react";
 import { client } from "../libs/client";
 import { TContents } from "../types/TypeBlog";
@@ -7,8 +8,16 @@ import { NewArticle } from "../components/templates/NewArticle";
 import titleImg from "../public/image/title.jpeg";
 import Image from "next/image";
 import { SpecialFeature } from "../components/templates/SpecialFeature";
+import { useDispatch } from "react-redux";
+import { setBlog } from "../provider/blogSlice";
 
 const Home = (blog: TContents) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setBlog(blog));
+  }, [blog]);
+
   return (
     <>
       <Head>
@@ -21,8 +30,8 @@ const Home = (blog: TContents) => {
         <h1>
           <Image src={titleImg} alt="タイトル" width={300} height={150} />
         </h1>
-        <TopSlide blog={blog} />
-        <NewArticle blog={blog} />
+        <TopSlide />
+        <NewArticle />
         <SpecialFeature />
       </main>
     </>
