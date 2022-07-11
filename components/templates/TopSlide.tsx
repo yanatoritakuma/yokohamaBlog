@@ -8,19 +8,21 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper";
 import { TContents } from "../../types/TypeBlog";
 import noImage from "../../public/image/noimage.png";
-
-type Props = {
-  blog: TContents;
-};
+import { useSelector } from "react-redux";
+import { RootState } from "../../app/store";
 
 // eslint-disable-next-line react/display-name
-export const TopSlide = memo((props: Props) => {
-  const { blog } = props;
-  const trend = blog.blog.filter((v) => v.category?.name === "トレンド");
+export const TopSlide = memo(() => {
+  const blogStore = useSelector((state: RootState) => state.blog);
+
+  const trend = blogStore.blog?.blog.filter(
+    (v) => v.category?.name === "トレンド"
+  );
+
   return (
     <section css={mainBox}>
       <Swiper navigation={true} modules={[Navigation]}>
-        {trend.map((v) => (
+        {trend?.map((v) => (
           <SwiperSlide key={v.id}>
             <Link href={`/blog/${v.id}`}>
               {v.eyecatch !== undefined ? (

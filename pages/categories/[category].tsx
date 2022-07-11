@@ -3,21 +3,43 @@ import { css } from "@emotion/react";
 import Link from "next/link";
 import Image from "next/image";
 import noImage from "../../public/image/noimage.png";
-import { LinkButton } from "../atoms/LinkButton";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 
+export async function getStaticPaths() {
+  return {
+    paths: [{ params: { category: "eat" } }, { params: { category: "play" } }],
+    fallback: false,
+  };
+}
+
+export const getStaticProps = async (context: {
+  params: { category: string };
+}) => {
+  const { category } = context.params;
+  return {
+    props: { category },
+  };
+};
+
+type Props = {
+  category: string;
+};
+
 // eslint-disable-next-line react/display-name
-export const NewArticle = memo(() => {
+const Category = memo((category: Props) => {
+  const categoryName = category.category;
   const blogStore = useSelector((state: RootState) => state.blog);
-  const newArticle = blogStore.blog?.blog.slice(0, 6);
+  const categoryBlog = blogStore.blog?.blog.filter(
+    (v) => v.category?.name === categoryName
+  );
 
   return (
-    <section css={newArticleMainBox}>
-      <h2>newTopics</h2>
-      <div css={newArticleMainBoxIn}>
-        {newArticle?.map((v) => (
-          <div key={v.id} css={newArticleBox}>
+    <section css={categoryBoxMain}>
+      <h2>{categoryName}Page</h2>
+      <div css={categoryBoxMainIn}>
+        {categoryBlog?.map((v) => (
+          <div key={v.id} css={categoryBox}>
             <Link href={`/blog/${v.id}`}>
               <div>
                 {v.eyecatch !== undefined ? (
@@ -35,44 +57,39 @@ export const NewArticle = memo(() => {
                     height={300}
                   />
                 )}
+                <h3>{v.title}</h3>
               </div>
             </Link>
-            <p>{v.title}</p>
           </div>
         ))}
-      </div>
-      <div css={btnBox}>
-        <Link href="BlogTop">
-          <div>
-            <LinkButton hoverLabel="click me!">More</LinkButton>
-          </div>
-        </Link>
       </div>
     </section>
   );
 });
 
-const newArticleMainBox = css`
+export default Category;
+
+const categoryBoxMain = css`
+  margin: 0 auto;
+  max-width: 1440px;
+
   h2 {
     text-align: center;
+    color: #f7c164;
   }
 `;
 
-const newArticleMainBoxIn = css`
+const categoryBoxMainIn = css`
   margin: 20px 0;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
 
   @media screen and (max-width: 768px) {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  h2 {
-    text-align: center;
+    display: block;
   }
 `;
 
-const newArticleBox = css`
+const categoryBox = css`
   margin: 10px auto;
   padding: 12px;
   display: flex;
@@ -82,22 +99,18 @@ const newArticleBox = css`
   cursor: pointer;
   width: 96%;
   overflow: hidden;
-
-  img {
+  border: 1px solid #aaa;
+  box-shadow: 4px 4px 10px #aaa;
+  border-radius: 10px;
+  transition: 0.5s all;
+  &:hover {
+    transform: translateY(-4px);
     transition: 0.5s all;
-    &:hover {
-      transform: scale(1.1, 1.1);
-      transition: 0.5s all;
-    }
+    opacity: 0.6;
   }
 
-  p {
+  h3 {
     width: 100%;
     text-align: center;
   }
-`;
-
-const btnBox = css`
-  margin: 30px 0;
-  text-align: center;
 `;
