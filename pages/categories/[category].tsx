@@ -1,6 +1,5 @@
 import React, { memo } from "react";
 import { css } from "@emotion/react";
-import { client } from "../../libs/client";
 import Link from "next/link";
 import Image from "next/image";
 import noImage from "../../public/image/noimage.png";
@@ -58,9 +57,9 @@ const Category = memo((category: Props) => {
                     height={300}
                   />
                 )}
+                <h3>{v.title}</h3>
               </div>
             </Link>
-            <p>{v.title}</p>
           </div>
         ))}
       </div>
@@ -71,6 +70,9 @@ const Category = memo((category: Props) => {
 export default Category;
 
 const categoryBoxMain = css`
+  margin: 0 auto;
+  max-width: 1440px;
+
   h2 {
     text-align: center;
     color: #f7c164;
@@ -83,7 +85,7 @@ const categoryBoxMainIn = css`
   grid-template-columns: 1fr 1fr;
 
   @media screen and (max-width: 768px) {
-    grid-template-columns: 1fr 1fr;
+    display: block;
   }
 `;
 
@@ -99,16 +101,15 @@ const categoryBox = css`
   overflow: hidden;
   border: 1px solid #aaa;
   box-shadow: 4px 4px 10px #aaa;
-
-  img {
+  border-radius: 10px;
+  transition: 0.5s all;
+  &:hover {
+    transform: translateY(-4px);
     transition: 0.5s all;
-    &:hover {
-      transform: scale(1.1, 1.1);
-      transition: 0.5s all;
-    }
+    opacity: 0.6;
   }
 
-  p {
+  h3 {
     width: 100%;
     text-align: center;
   }

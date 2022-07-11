@@ -44,11 +44,20 @@ const imgLinkBox = css`
   justify-content: space-between;
   align-items: center;
 
+  @media screen and (max-width: 768px) {
+    display: block;
+  }
+
   .imgBox {
     display: block;
     width: 48%;
     height: auto;
     cursor: pointer;
+
+    @media screen and (max-width: 768px) {
+      margin: 18px auto;
+      width: 94%;
+    }
   }
 
   .imgBoxIn {
