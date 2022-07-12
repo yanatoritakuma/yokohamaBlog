@@ -26,25 +26,24 @@ type Props = {
   category: string;
 };
 
-// eslint-disable-next-line react/display-name
 const Category = memo((category: Props) => {
   const categoryName = category.category;
   const blogStore = useSelector((state: RootState) => state.blog);
-  const categoryBlog = blogStore.blog?.blog.filter(
-    (v) => v.category?.name === categoryName
+  const categoryBlogs = blogStore.blog?.blog.filter(
+    (categoryBlog) => categoryBlog.category?.name === categoryName
   );
 
   return (
     <section css={categoryBoxMain}>
       <h2>{categoryName}Page</h2>
       <div css={categoryBoxMainIn}>
-        {categoryBlog?.map((v) => (
-          <div key={v.id} css={categoryBox}>
-            <Link href={`/blog/${v.id}`}>
+        {categoryBlogs?.map((categoryBlog) => (
+          <div key={categoryBlog.id} css={categoryBox}>
+            <Link href={`/blog/${categoryBlog.id}`}>
               <div>
-                {v.eyecatch !== undefined ? (
+                {categoryBlog.eyecatch !== undefined ? (
                   <Image
-                    src={v.eyecatch.url}
+                    src={categoryBlog.eyecatch.url}
                     alt="アイキャッチ"
                     width={500}
                     height={300}
@@ -57,7 +56,7 @@ const Category = memo((category: Props) => {
                     height={300}
                   />
                 )}
-                <h3>{v.title}</h3>
+                <h3>{categoryBlog.title}</h3>
               </div>
             </Link>
           </div>

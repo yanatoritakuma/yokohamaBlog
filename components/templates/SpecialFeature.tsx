@@ -5,7 +5,6 @@ import Image from "next/image";
 import eatImg from "../../public/image/eat.jpeg";
 import playImg from "../../public/image/play.jpeg";
 
-// eslint-disable-next-line react/display-name
 export const SpecialFeature = memo(() => {
   return (
     <section css={featureBox}>

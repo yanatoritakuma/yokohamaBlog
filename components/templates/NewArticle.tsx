@@ -7,7 +7,6 @@ import { LinkButton } from "../atoms/LinkButton";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 
-// eslint-disable-next-line react/display-name
 export const NewArticle = memo(() => {
   const blogStore = useSelector((state: RootState) => state.blog);
   const newArticle = blogStore.blog?.blog.slice(0, 6);
