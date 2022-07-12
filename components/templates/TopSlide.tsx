@@ -11,25 +11,24 @@ import noImage from "../../public/image/noimage.png";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 
-// eslint-disable-next-line react/display-name
 export const TopSlide = memo(() => {
   const blogStore = useSelector((state: RootState) => state.blog);
 
-  const trend = blogStore.blog?.blog.filter(
-    (v) => v.category?.name === "トレンド"
+  const trends = blogStore.blog?.blog.filter(
+    (trend) => trend.category?.name === "トレンド"
   );
 
   return (
     <section css={mainBox}>
       <Swiper navigation={true} modules={[Navigation]}>
-        {trend?.map((v) => (
-          <SwiperSlide key={v.id}>
-            <Link href={`/blog/${v.id}`}>
-              {v.eyecatch !== undefined ? (
+        {trends?.map((trend) => (
+          <SwiperSlide key={trend.id}>
+            <Link href={`/blog/${trend.id}`}>
+              {trend.eyecatch !== undefined ? (
                 <div css={slideImg}>
-                  <h2>{v.title}</h2>
+                  <h2>{trend.title}</h2>
                   <Image
-                    src={v.eyecatch?.url}
+                    src={trend.eyecatch?.url}
                     alt="アイキャッチ"
                     width={1440}
                     layout="fill"

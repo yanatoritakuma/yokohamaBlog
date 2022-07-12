@@ -7,7 +7,6 @@ type Props = {
   hoverLabel: string;
 };
 
-// eslint-disable-next-line react/display-name
 export const LinkButton = memo((props: Props) => {
   const { children, onClick, hoverLabel } = props;
 
